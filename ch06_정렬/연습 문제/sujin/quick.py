@@ -19,5 +19,17 @@ def quick_sort(array, start, end):
     quick_sort(array, start, right-1)
     quick_sort(array, right+1, end)
 
-quick_sort(array, 0, len(array) - 1)
-print(array)
+# quick_sort(array, 0, len(array) - 1)
+# print(array)
+
+def python_quick_sort(array):
+    if len(array) < 1:
+        return array
+    pivot = array[0]
+    tail = array[1:]
+    left_sort = [x for x in tail if x<= pivot]
+    right_sort = [x for x in tail if x> pivot]
+    
+    return python_quick_sort(left_sort) + [pivot] + python_quick_sort(right_sort)
+
+print(python_quick_sort(array))
