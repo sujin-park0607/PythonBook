@@ -9,5 +9,5 @@ for _ in range(n):
 
 num_seq.sort() # 정렬
 num_seq.reverse() # 뒤집기
-
+로
 print(num_seq) # 결과 출력
