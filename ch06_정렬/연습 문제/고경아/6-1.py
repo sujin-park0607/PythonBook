@@ -8,6 +8,6 @@ for _ in range(n):
     num_seq.append(int(input("수열 숫자: ")))
 
 num_seq.sort() # 정렬
-num_seq.reverse() # 뒤집기
-로
+num_seq.reverse() # 뒤집기  ## sort 옵션 사용하기!
+
 print(num_seq) # 결과 출력
