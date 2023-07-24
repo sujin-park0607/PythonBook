@@ -2,7 +2,7 @@ n = int(input("학생의 수: "))
 
 student_score = []
 for _ in range(n):
-    student_score_input= input("학생 이름과 성적을 공백으로 구분하여 입력: ").split()
+    student_score_input = input("학생 이름과 성적을 공백으로 구분하여 입력: ").split()
     student_score.append([student_score_input[0], int(student_score_input[1])])
 
 for i in range(len(student_score)):
