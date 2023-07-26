@@ -10,7 +10,7 @@
 ### 시간 복잡도 계산
 # A.  
 import sys
-sys.setrecursionlimit()
+# sys.setrecursionlimit()
 
 def calculate(x, cnt):
     global minCnt
@@ -24,7 +24,10 @@ def calculate(x, cnt):
             # cnt 최솟값 저장
             if minCnt > cnt:
                 minCnt = cnt
-        # 3으로 나눠질 때
+        # 5으로 나눠질 때
+        if x % 5 == 0:
+            calculate(x//5, cnt+1)
+        # 3로 나눠질 때
         if x % 3 == 0:
             calculate(x//3, cnt+1)
         # 2로 나눠질 때
