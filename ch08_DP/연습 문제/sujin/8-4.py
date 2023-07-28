@@ -9,7 +9,7 @@
 
 ### 시간 복잡도 계산
 # A.  
-d = 30 * [0]
+d = 10001 * [0]
 n, x = map(int,input().split(" "))
 
 for _ in range(n):
@@ -19,11 +19,12 @@ for _ in range(n):
 
 d[0] = 1001
 for i in range(1, x+1):
+    if d[i] != 0:
+        continue
     if i-3 >= 0:
         d[i] = min(d[i-2], d[i-3]) + 1
     else:
         d[i] = 1001
-    print(i," : ",d)
 
 if d[x] > 1000:print(-1)
 else: print(d[x])
