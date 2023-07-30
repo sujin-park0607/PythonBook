@@ -19,8 +19,9 @@
 
 ### 🙆멤버
 <table>
+	
  <tr>
-    <td align="center"><a href="https://github.com/Jupiter-J"><img src="https://github.com/sujin-park0607/PythonBook/assets/75667075/ef4e092c-da0e-4bcc-b700-a6ac8a2324e2" width="130px;" alt=""></a></td>
+    <td align="center"><a href="https://github.com/Jupiter-J"><img src="https://file3.instiz.net/data/cached_img/upload/2021/03/02/20/d9459e5a8b7552eb00b5a5f3bb9f517a.jpg" width="130px;" alt=""></a></td>
     <td align="center"><a href="https://github.com/CodyMan0"><img src="https://github.com/sujin-park0607/PythonBook/assets/75667075/ef4e092c-da0e-4bcc-b700-a6ac8a2324e2" width="130px;" alt=""></a></td>
     <td align="center"><a href="https://github.com/GyungA"><img src="https://github.com/Python-Algorithm-Study/PythonBook/assets/71212038/c9351f3d-48b6-4373-b84e-ef2fff3dd5be" width="130px;" alt=""></a></td>
 	 <td align="center"><a href="https://github.com/sujin-park0607"><img src="https://github.com/sujin-park0607/PythonBook/assets/75667075/7097cc45-af2c-4847-b285-fa00f36f4771" width="130px;" alt=""></a></td>
