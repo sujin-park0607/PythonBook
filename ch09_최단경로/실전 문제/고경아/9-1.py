@@ -1,6 +1,16 @@
 '''
 [미래 도시]
 1번 회사에서 출발하여 K번 회사를 지나 X번 회사로 가는 최단 경로
+
+(READ_ME에도 있는 내용)
+### 첫번째 풀이(=마지막 풀이)
+1. `input = sys.stdin.readline()`와 같이 두고 `n, m = map(int, input.split())` 이렇게 사용하면, 입력값을 한 번만 받아 'input'이라는 변수에 저장하여 의도한 것과 다르게 작동합니다.
+   `input = sys.stdin.readline`, `n, m = map(int, input().split())`와 같이 사용하여야 함수를 저장하여 짧은 이름으로 사용할 수 있습니다.
+2. `graph = [] * (len(linked_company) + 1)`는 같은 리스트 여러 개를 참조하여 잘못된 결과로 이어집니다.
+   - 올바른 선언은 `graph = [[] for _ in range(len(linked_company) + 1)]`입니다. (틀린 풀이 중 일부라, 이번 문제와 무관합니다.)
+   - `graph = [[INF] * (n + 1) for _ in range(n+1)]`는 정상적으로 작동합니다. 두 식에서 파이썬의 객체 참조와 복사 방식이 다르다고 합니다.
+
+회사 연결 정보를 그래프로 만든 후 다익스트라를 두 번 사용하여 해결했습니다.
 '''
 import heapq
 import sys
