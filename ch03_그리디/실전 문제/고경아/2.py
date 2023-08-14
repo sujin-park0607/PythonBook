@@ -14,3 +14,5 @@ for s in s_list:
 
 print(s_list)
 print(result)
+
+### -> 1은 곱하는 것보다 더하는 게 이득이라는 점을 고려하지 않음!
