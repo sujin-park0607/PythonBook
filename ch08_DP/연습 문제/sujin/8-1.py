@@ -14,7 +14,7 @@ import sys
 
 def calculate(x, cnt):
     global minCnt
-    # print("x,cnt : ",x, cnt)
+    print("x,cnt : ",x, cnt)
     # 기존에 최소연산횟수를 안넘어갈 경우
     if cnt <= minCnt:
 
@@ -35,7 +35,7 @@ def calculate(x, cnt):
             calculate(x//2, cnt+1)
         # 1을 뺄 때
         calculate(x-1, cnt+1)
-    # print("back")
+    print("back")
     return minCnt
     
 N = int(input())
