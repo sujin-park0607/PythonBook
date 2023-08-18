@@ -24,11 +24,11 @@ def isRight(p):
 def solution(p):
     answer = ''
     # 균형잡힌 문자열인지 확인
-    if isBalance(p):
-        if isRight(p):
-            return p
-        else:
-            u = q
+    # if isBalance(p):
+    #     if isRight(p):
+    #         return p
+    #     else:
+    #         u = q
     return answer
 
 print(solution("(()())()"))
