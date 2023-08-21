@@ -1,90 +1,55 @@
+from collections import deque
 
-"""
-인구인동
-2 20 50
-50 30
-20 40
-"""
+def get_next_pos(pos, board):
+    next_pos = [] # 반환 결과 (이동 가능한 위치들)
+    pos = list(pos) # 현재 위치 정보를 리스트로 변환 (집합 → 리스트)
+    pos1_x, pos1_y, pos2_x, pos2_y = pos[0][0], pos[0][1], pos[1][0], pos[1][1]
+    # (상, 하, 좌, 우)로 이동하는 경우에 대해서 처리
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    for i in range(4):
+        pos1_next_x, pos1_next_y, pos2_next_x, pos2_next_y = pos1_x + dx[i], pos1_y + dy[i], pos2_x + dx[i], pos2_y + dy[i]
+        # 이동하고자 하는 두 칸이 모두 비어 있다면
+        if board[pos1_next_x][pos1_next_y] == 0 and board[pos2_next_x][pos2_next_y] == 0:
+            next_pos.append({(pos1_next_x, pos1_next_y), (pos2_next_x, pos2_next_y)})
+    # 현재 로봇이 가로로 놓여 있는 경우
+    if pos1_x == pos2_x:
+        for i in [-1, 1]: # 위쪽으로 회전하거나, 아래쪽으로 회전
+            if board[pos1_x + i][pos1_y] == 0 and board[pos2_x + i][pos2_y] == 0: # 위쪽 혹은 아래쪽 두 칸이 모두 비어 있다면
+                next_pos.append({(pos1_x, pos1_y), (pos1_x + i, pos1_y)})
+                next_pos.append({(pos2_x, pos2_y), (pos2_x + i, pos2_y)})
+    # 현재 로봇이 세로로 놓여 있는 경우
+    elif pos1_y == pos2_y:
+        for i in [-1, 1]: # 왼쪽으로 회전하거나, 오른쪽으로 회전
+            if board[pos1_x][pos1_y + i] == 0 and board[pos2_x][pos2_y + i] == 0: # 왼쪽 혹은 오른쪽 두 칸이 모두 비어 있다면
+                next_pos.append({(pos1_x, pos1_y), (pos1_x, pos1_y + i)})
+                next_pos.append({(pos2_x, pos2_y), (pos2_x, pos2_y + i)})
+    # 현재 위치에서 이동할 수 있는 위치를 반환
+    return next_pos
 
-from itertools import combinations
-n = int(input()) # 복도의 크기
-board = [] # 복도 정보 (N x N)
-teachers = [] # 모든 선생님 위치 정보
-spaces = [] # 모든 빈 공간 위치 정보
-
-for i in range(n):
-    board.append(list(input().split()))
-    for j in range(n):
-        # 선생님이 존재하는 위치 저장
-        if board[i][j] == 'T':
-            teachers.append((i, j))
-        # 장애물을 설치할 수 있는 (빈 공간) 위치 저장
-        if board[i][j] == 'X':
-            spaces.append((i, j))
-
-# 특정 방향으로 감시를 진행 (학생 발견: True, 학생 미발견: False)
-def watch(x, y, direction):
-    # 왼쪽 방향으로 감시
-    if direction == 0:
-        while y >= 0:
-            if board[x][y] == 'S': # 학생이 있는 경우
-                return True
-            if board[x][y] == 'O': # 장애물이 있는 경우
-                return False
-            y -= 1
-    # 오른쪽 방향으로 감시
-    if direction == 1:
-        while y < n:
-            if board[x][y] == 'S': # 학생이 있는 경우
-                return True
-            if board[x][y] == 'O': # 장애물이 있는 경우
-                return False
-            y += 1
-    # 위쪽 방향으로 감시
-    if direction == 2:
-        while x >= 0:
-            if board[x][y] == 'S': # 학생이 있는 경우
-                return True
-            if board[x][y] == 'O': # 장애물이 있는 경우
-                return False
-            x -= 1
-    # 아래쪽 방향으로 감시
-    if direction == 3:
-        while x < n:
-            if board[x][y] == 'S': # 학생이 있는 경우
-                return True
-            if board[x][y] == 'O': # 장애물이 있는 경우
-                return False
-            x += 1
-    return False
-
-# 장애물 설치 이후에, 한 명이라도 학생이 감지되는지 검사
-def process():
-    # 모든 선생의 위치를 하나씩 확인
-    for x, y in teachers:
-        # 4가지 방향으로 학생을 감지할 수 있는지 확인
-        for i in range(4):
-            if watch(x, y, i):
-                return True
-    return False
-
-find = False # 학생이 한 명도 감지되지 않도록 설치할 수 있는지의 여부
-
-# 빈 공간에서 3개를 뽑는 모든 조합을 확인
-for data in combinations(spaces, 3):
-    # 장애물들을 설치해보기
-    for x, y in data:
-        board[x][y] = 'O'
-    # 학생이 한 명도 감지되지 않는 경우
-    if not process():
-        # 원하는 경우를 발견한 것임
-        find = True
-        break
-    # 설치된 장애물을 다시 없애기
-    for x, y in data:
-        board[x][y] = 'X'
-
-if find:
-    print('YES')
-else:
-    print('NO')
+def solution(board):
+    # 맵의 외곽에 벽을 두는 형태로 맵 변형
+    n = len(board)
+    new_board = [[1] * (n + 2) for _ in range(n + 2)]
+    for i in range(n):
+        for j in range(n):
+            new_board[i + 1][j + 1] = board[i][j]
+    # 너비 우선 탐색(BFS) 수행
+    q = deque()
+    visited = []
+    pos = {(1, 1), (1, 2)} # 시작 위치 설정
+    q.append((pos, 0)) # 큐에 삽입한 뒤에
+    visited.append(pos) # 방문 처리
+    # 큐가 빌 때까지 반복
+    while q:
+        pos, cost = q.popleft()
+        # (n, n) 위치에 로봇이 도달했다면, 최단 거리이므로 반환
+        if (n, n) in pos:
+            return cost
+        # 현재 위치에서 이동할 수 있는 위치 확인
+        for next_pos in get_next_pos(pos, new_board):
+            # 아직 방문하지 않은 위치라면 큐에 삽입하고 방문 처리
+            if next_pos not in visited:
+                q.append((next_pos, cost + 1))
+                visited.append(next_pos)
+    return 0
