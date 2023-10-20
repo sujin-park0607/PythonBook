@@ -9,7 +9,7 @@
 # A. 
 
 ### 소요시간
-# 19: 00 ~ 
+# 19: 00 ~ 20:05
 import sys
 from collections import deque
 input = sys.stdin.readline

@@ -16,6 +16,16 @@ def combinations(array, r):
         else:
             for next in combinations(array[i+1:], r-1):
                 yield [array[i]] + next
+
+# 3. 중복조합
+def combinations(array, r):
+    for i in range(len(array)):
+        if r == 1:
+            yield [array[i]]
+        else:
+            for next in combinations(array[i:], r-1):
+                yield [array[i]] + next
+                
 array = [0, 1, 2, 3, 4]
 combinations_list = []
 for i in combinations(array, 3):
@@ -25,10 +35,3 @@ print(combinations_list)
 print("조합 개수:",len(combinations_list))
 
 
-def combinations(array, r):
-    for i in range(len(array)):
-        if r == 1:
-            yield [array[i]]
-        else:
-            for next in combinations(array[i+1:], r-1):
-                yield [array[i]] + next

@@ -36,16 +36,16 @@ def solution(n, build_frame):
                     array[x][y] = 1
                     answer.append([x,y,1])
         # 구조물 제거
-        else:
-            # 기둥
-            if a == 0:
+        # else:
+        #     # 기둥
+        #     if a == 0:
                 
             # 보
             
     # for i in array:
     #     print(i)
     answer.sort(key = lambda x:x[0])
-    return answer
+    return answers
 
 n = 5
 build_frame = 	[[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
